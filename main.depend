@@ -1,12 +1,23 @@
 # depslib dependency file v1.0
-1734163835 source:d:\kuliah semester 3\praktikum struktur data\tubes\main\main.cpp
+1734423786 source:d:\kuliah semester 3\praktikum struktur data\tubes\main\main.cpp
 	<iostream>
 	"tubes.h"
 
-1734156183 d:\kuliah semester 3\praktikum struktur data\tubes\main\tubes.h
+1734423079 d:\kuliah semester 3\praktikum struktur data\tubes\main\tubes.h
 	<iostream>
 
-1734162867 source:d:\kuliah semester 3\praktikum struktur data\tubes\main\tubes.cpp
+1734696226 source:d:\kuliah semester 3\praktikum struktur data\tubes\main\tubes.cpp
+	"tubes.h"
+	<iostream>
+
+1734696347 source:d:\kuliah semester 3\praktikum struktur data\main\main.cpp
+	<iostream>
+	"tubes.h"
+
+1734423079 d:\kuliah semester 3\praktikum struktur data\main\tubes.h
+	<iostream>
+
+1734696226 source:d:\kuliah semester 3\praktikum struktur data\main\tubes.cpp
 	"tubes.h"
 	<iostream>
 

@@ -119,9 +119,9 @@ void insertLastPen(ListP &L, adrP pointerP){
     }
 }
 
-void insertFirstTrans(ListT &LT, ListO LO, ListP LP, adrT pointerT, string namaOjol, string namaPen) {
-    adrO o = findParent(LO, namaOjol);
-    adrP p = findChild(LP, namaPen);
+void insertFirstTrans(ListT &LT, ListO LO, ListP LP, adrT pointerT, string namaOjol, string noTelpOjol, string namaPen, string noTelpPen) {
+    adrO o = findParent(LO, namaOjol, noTelpOjol);
+    adrP p = findChild(LP, namaPen, noTelpPen);
     if (isEmptyT(LT)) {
         first(LT) = pointerT;
         last(LT) = pointerT;
@@ -136,9 +136,9 @@ void insertFirstTrans(ListT &LT, ListO LO, ListP LP, adrT pointerT, string namaO
     }
 }
 
-void insertLastTrans(ListT &LT, ListO LO, ListP LP, adrT pointerT, string namaOjol, string namaPen){
-    adrO o = findParent(LO, namaOjol);
-    adrP p = findChild(LP, namaPen);
+void insertLastTrans(ListT &LT, ListO LO, ListP LP, adrT pointerT, string namaOjol, string noTelpOjol, string namaPen, string noTelpPen){
+    adrO o = findParent(LO, namaOjol, noTelpOjol);
+    adrP p = findChild(LP, namaPen, noTelpPen);
     if (isEmptyT(LT)) {
         first(LT) = pointerT;
         last(LT) = pointerT;
@@ -287,10 +287,10 @@ void showRelation(ListT L) {
     }
 }
 
-adrO findParent(ListO L, string namaOjol) {
+adrO findParent(ListO L, string namaOjol, string noTelpOjol) {
     adrO o = first(L);
     while (o != nil) {
-        if (info(o).nama == namaOjol) {
+        if (info(o).nama == namaOjol && info(o).noTelp == noTelpOjol) {
             return o;
         }
         o = next(o);
@@ -298,10 +298,10 @@ adrO findParent(ListO L, string namaOjol) {
     return nil;
 }
 
-adrP findChild(ListP L, string namaPen) {
+adrP findChild(ListP L, string namaPen, string noTelpPen) {
     adrP p = first(L);
     while (p != nil) {
-        if (info(p).nama == namaPen) {
+        if (info(p).nama == namaPen && info(p).noTelp == noTelpPen) {
             return p;
         }
         p = next(p);
@@ -309,9 +309,9 @@ adrP findChild(ListP L, string namaPen) {
     return nil;
 }
 
-adrP findPenFrom(ListO LO, ListP LP, ListT LT, string namaOjol, string namaPen){
+adrP findPenFrom(ListO LO, ListP LP, ListT LT, string namaOjol, string noTelpOjol, string namaPen){
     adrT t = first(LT);
-    adrO o = findParent(LO, namaOjol);
+    adrO o = findParent(LO, namaOjol, noTelpOjol);
     adrP p = first(LP);
 
     while (p != nil) {
@@ -332,17 +332,17 @@ adrP findPenFrom(ListO LO, ListP LP, ListT LT, string namaOjol, string namaPen){
 }
 
 
-void editDataOjol(ListO &L, string namaData){
-    adrO o = findParent(L, namaData);
+void editDataOjol(ListO &L, string namaData, string noTelp){
+    adrO o = findParent(L, namaData, noTelp);
     if (o != nil) {
         infoO data;
-        cout << "Nama Ojol : ";
+        cout << "Nama Ojol          : ";
         cin >> data.nama;
-        cout << "No Telepon Ojol : ";
+        cout << "No Telepon Ojol    : ";
         cin >> data.noTelp;
-        cout << "Motor Ojol : ";
+        cout << "Motor Ojol         : ";
         cin >> data.jenisMotor;
-        cout << "Plat Nomor : ";
+        cout << "Plat Nomor         : ";
         cin >> data.platNomor;
         info(o).nama = data.nama;
         info(o).noTelp = data.noTelp;
@@ -353,13 +353,13 @@ void editDataOjol(ListO &L, string namaData){
     }
 }
 
-void editDataPen(ListP &L, string namaPen){
-    adrP p = findChild(L, namaPen);
+void editDataPen(ListP &L, string namaPen, string noTelp){
+    adrP p = findChild(L, namaPen, noTelp);
     if (p != nil) {
         infoP data;
-        cout << "Nama Penumpang : ";
+        cout << "Nama Penumpang         : ";
         cin >> data.nama;
-        cout << "No Telepon Penumpang : ";
+        cout << "No Telepon Penumpang   : ";
         cin >> data.noTelp;
         info(p).nama = data.nama;
         info(p).noTelp = data.noTelp;
@@ -371,29 +371,32 @@ void editDataPen(ListP &L, string namaPen){
 void showAll(ListO LO, ListT LT){
     adrO o = first(LO);
     while (o != nil) {
-        cout << "Nama ojol : " << info(o).nama << endl;
-        cout << "No Telp : " << info(o).noTelp << endl;
-        cout << "Jenis Motor : " << info(o).jenisMotor << endl;
-        cout << "Plat Nomor : " << info(o).platNomor << endl;
+        cout << "Nama ojol      : " << info(o).nama << endl;
+        cout << "No Telp        : " << info(o).noTelp << endl;
+        cout << "Jenis Motor    : " << info(o).jenisMotor << endl;
+        cout << "Plat Nomor     : " << info(o).platNomor << endl;
 
         adrT t = first(LT);
+        cout << endl;
         cout << "Penumpang : " << endl;
         while (t != nil) {
             if (firstOjol(t) == o) {
-                cout << "- Nama : " << info(firstPen(t)).nama << endl;
-                cout << "- No telp : " << info(firstPen(t)).noTelp << endl;
+                cout << "- Nama         : " << info(firstPen(t)).nama << endl;
+                cout << "- No telp      : " << info(firstPen(t)).noTelp << endl;
+                cout << "- Tarif        : " << info(t).cost << endl;
+                cout << endl;
             }
             t = next(t);
         }
-
+        cout << "=============================" << endl;
         o = next(o);
     }
 
 }
 
-void deleteParentChild(ListO &LO, ListP &LP, ListT &LT, string namaOjol){
+void deleteParentChild(ListO &LO, ListP &LP, ListT &LT, string namaOjol, string noTelp){
     adrT alamatRelasi;
-    adrO alamatOjol = findParent(LO, namaOjol);
+    adrO alamatOjol = findParent(LO, namaOjol, noTelp);
     if (alamatOjol != nil) {
         alamatRelasi = first(LT);
         while (alamatRelasi != nil) {
@@ -407,7 +410,8 @@ void deleteParentChild(ListO &LO, ListP &LP, ListT &LT, string namaOjol){
         while (alamatRelasi != nil) {
             if (firstOjol(alamatRelasi) == nil) {
                 string namaPenumpang = info(firstPen(alamatRelasi)).nama;
-                adrP alamatPenumpang = findChild(LP, namaPenumpang);
+                string noTelpPenumpang = info(firstPen(alamatRelasi)).noTelp;
+                adrP alamatPenumpang = findChild(LP, namaPenumpang, noTelpPenumpang);
                 adrT alamatRelasiPenumpang = first(LT);
                 int jumlahDriver = 0;
                 while (alamatRelasiPenumpang != nil) {
@@ -454,9 +458,9 @@ void deleteParentChild(ListO &LO, ListP &LP, ListT &LT, string namaOjol){
     }
 }
 
-void deletePenFrom(ListO LO, ListP &LP, ListT &LT, string namaOjol, string namaPen){
-    adrP alamatPenumpang = findChild(LP, namaPen);
-    adrO alamatDriver = findParent(LO, namaOjol);
+void deletePenFrom(ListO LO, ListP &LP, ListT &LT, string namaOjol, string noTelpOjol, string namaPen, string noTelpPen){
+    adrP alamatPenumpang = findChild(LP, namaPen, noTelpPen);
+    adrO alamatDriver = findParent(LO, namaOjol, noTelpOjol);
     adrT alamatRelasi;
     if (alamatDriver != nil && alamatPenumpang != nil) {
         alamatRelasi = first(LT);
@@ -507,8 +511,8 @@ void deletePenFrom(ListO LO, ListP &LP, ListT &LT, string namaOjol, string namaP
         cout << "!!! Terdapat Data Yang Tidak Ditemukan !!!" << endl;
     }
 }
-int sumCost(ListO LO, ListT LT, string namaOjol){
-    adrO o = findParent(LO, namaOjol);
+int sumCost(ListO LO, ListT LT, string namaOjol, string noTelp){
+    adrO o = findParent(LO, namaOjol, noTelp);
     adrT t = first(LT);
     int jumlah = 0;
     if (o != nil) {
@@ -537,5 +541,6 @@ void menu() {
     cout << "||   8. Cari Data Penumpang        ||" << endl;
     cout << "||   9. Hitung Pendapatan          ||" << endl;
     cout << "||   10. Tampilkan Semua Data      ||" << endl;
+    cout << "||   11. Keluar                    ||" << endl;
     cout << "=====================================" << endl;
 }

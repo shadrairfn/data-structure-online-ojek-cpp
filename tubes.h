@@ -68,17 +68,17 @@ struct ListT {
 // Primitive dari soal
 void insertFirstOjol(ListO &L, adrO pointerO);
 void insertLastOjol(ListO &L, adrO pointerO);
-void deleteParentChild(ListO &LO, ListP &LP, ListT &LT, string namaOjol);
+void deleteParentChild(ListO &LO, ListP &LP, ListT &LT, string namaOjol, string noTelp);
 void showParent(ListO L);
-adrO findParent(ListO L, string namaOjol);
+adrO findParent(ListO L, string namaOjol, string noTelpOjol);
 void insertFirstPen(ListP &L, adrP pointerP);
 void insertLastPen(ListP &L, adrP pointerP);
-void editDataOjol(ListO &L, string namaData);
-void editDataPen(ListP &L, string namaData);
+void editDataOjol(ListO &L, string namaData, string noTelp);
+void editDataPen(ListP &L, string namaData, string noTelp);
 void showAll(ListO LO, ListT LT);
 adrP findPenFrom(ListO LO, ListP LP, ListT LT, string namaOjol, string namaPen);
-void deletePenFrom(ListO LO, ListP &LP, ListT &LT, string namaOjol, string namaPen);
-int sumCost(ListO LO, ListT LT, string namaOjol);
+void deletePenFrom(ListO LO, ListP &LP, ListT &LT, string namaOjol, string noTelpOjol, string namaPen, string noTelpPen);
+int sumCost(ListO LO, ListT LT, string namaOjol, string noTelp);
 
 // Primitive tambahan
 
@@ -105,10 +105,10 @@ void deleteAfterT(ListT &L, adrT prec, adrP &pointerT);
 void deleteFirstT(ListT &L, adrT &pointerT);
 void deleteLastT(ListT &L, adrT &pointerT);
 
-void insertFirstTrans(ListT &LT, ListO LO, ListP LP, adrT pointerT, string namaOjol, string namaPen);
+void insertFirstTrans(ListT &LT, ListO LO, ListP LP, adrT pointerT, string namaOjol, string noTelpOjol, string namaPen, string noTelpPen);
 void insertLastTrans(ListT &L, ListO LO, ListP LP, adrT pointerT, string namaOjol, string namaPen);
 
-adrP findChild(ListP L, string namaPen);
+adrP findChild(ListP L, string namaPen, string noTelpPen);
 
 void showChild(ListP L);
 void showRelation(ListT L);
